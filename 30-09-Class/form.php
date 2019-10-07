@@ -1,3 +1,4 @@
+
 <?php
 $DBhost="localhost";
 $DBuser="root";
@@ -20,7 +21,7 @@ if (isset($_POST['submit'])){
     }
 }
 
-$selectSQL="SELECT * FROM `reg`";
+$selectSQL="SELECT * FROM `reg` order by name ASC";
 $runSelect=mysqli_query($conn,$selectSQL);
 ?>
 
@@ -66,8 +67,7 @@ $runSelect=mysqli_query($conn,$selectSQL);
             </div>
         </form>
 
-        <h3 class="text-center text-success"><?= isset($_GET['msg']) ?$_GET['msg'] :'' ?></h3>
-        <h3>User Table:</h3><br>
+        <h3>User Table:</h3>
 
         <table class="table table-bordered">
             <thead>
@@ -75,7 +75,7 @@ $runSelect=mysqli_query($conn,$selectSQL);
                 <th>User Name</th>
                 <th>Email</th>
                 <th>Pass</th>
-                <th>Action</th>
+                <th colspan="2">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -86,7 +86,8 @@ $runSelect=mysqli_query($conn,$selectSQL);
                 <td><?php echo $data['name'];?></td>
                 <td><?php echo $data['email'];?></td>
                 <td><?php echo $data['pass'];?></td>
-                <td><a href="update.php?id=<?= $data['id']; ?>"><button class="btn btn-success">Update</button></a><button class="btn btn-danger">Delete</button></td>
+                <td><a href="update.php?id=<?php echo $data['id'];?>">Update</a></td>
+                <td><button class="btn btn-danger">Delete</button></td>
             </tr>
             <?php } ?>
             </tbody>

@@ -1,29 +1,15 @@
 <?php
+    require_once 'MyDataClass.php';
     if(isset($_POST['submit'])){
-        $fname=$_POST['fname'];
-        $lname=$_POST['lname'];
-        $email=$_POST['email'];
-        $pass=$_POST['pass'];
-        $c_pass=$_POST['c_pass'];
-        $dbhost="localhost";
-        $dbuser="root";
-        $dbpass="";
-        $dbName="cbait";
-        $conn=mysqli_connect($dbhost, $dbuser, $dbpass, $dbName);
-        if($conn==false){
-            echo "Database conneciton failed";
+        $dataClassObject=new MyDataClass();
+        $result=$dataClassObject->userInformation();
+        if ($result){
+            echo "Data insert Success !!!!!!!!!!!";
         }else{
-            $sql="INSERT INTO `my_table`(`fname`, `lname`, `email`, `pass`, `c_pass`) VALUES ('$fname','$lname','$email','$pass','$c_pass')";
-            $result=mysqli_query($conn,$sql);
-            if($result==true){
-                echo "Data Inserted success !!!!";
-            }else{
-                echo "Data insert failed";
-            }
+            echo "Data insert Fail !!!!!!!!!!!";
         }
     }
 ?>
-
 <!doctype html>
 <html lang="en">
 <head>
